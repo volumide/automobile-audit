@@ -2,6 +2,7 @@
   <p class=" p-3 font-bold text-blue-600 my-10 text-3xl text-center">
     Automobile Audit Form
   </p>
+  <!-- error messages -->
   <ul v-if="errorMessage.length > 0" class="flex flex-col m-4 items-center">
     <li
       v-for="(error, index) in errorMessage"
@@ -11,10 +12,13 @@
       {{ error }}
     </li>
   </ul>
+
+  <!-- form -->
   <form
     @submit.prevent="submit"
     class="my-11 sm:w-2/5 mx-auto bg-blue-200 rounded-md  p-7 shadow-md"
   >
+  <!-- name -->
     <div class="p-3">
       <label for="name" class="py-2 block font-semibold">Name</label>
       <input
@@ -28,6 +32,8 @@
       />
     </div>
 
+
+<!-- reference code -->
     <div class="p-3">
       <label for="ref_code" class="py-2 block font-semibold"
         >Reference code</label
@@ -43,6 +49,7 @@
       />
     </div>
 
+<!-- email -->
     <div class="p-3">
       <label for="email" class="py-2 block font-semibold">Email</label>
       <input
@@ -56,6 +63,7 @@
       />
     </div>
 
+<!-- automobile maker -->
     <div class="p-3">
       <label for="make" class="py-2 block font-semibold">Auto maker</label>
       <select
@@ -78,6 +86,7 @@
       </select>
     </div>
 
+<!-- automobile model -->
     <div v-if="models.length > 0" class="p-3">
       <label for="model" class="py-2 block font-semibold">Model</label>
       <select
@@ -94,6 +103,7 @@
       </select>
     </div>
 
+<!-- Issues check boxes -->
     <div class="p-3 flex flex-wrap ">
       <div class="px-2">
         <input
@@ -120,6 +130,8 @@
         >
       </div>
     </div>
+
+	<!-- submit -->
     <button
       type="submit"
       class="p-4 text-white font-semibold blocks bg-blue-600 my-3 mx-3  rounded-lg outline-none focus:outline-none"
@@ -135,6 +147,7 @@ import auto from "../assets/autoMaker";
 import router from "@/router";
 export default {
   setup() {
+	//   intitlaize form fields data
     const data = ref({
       name: "",
       refCode: "",
@@ -147,20 +160,24 @@ export default {
     const emailTest = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const models = ref([]);
     const makers = ref([]);
+
     onMounted(() => {
-      makers.value = auto;
+      makers.value = auto; // auto is imported from automaker jsavascript array @'../assets/autoMaker'
     });
 
+	// function changes model option based on car maker chosen  
     const getModel = (e) => {
       let id = +e.target.options[e.target.options.selectedIndex].id - 1;
       models.value = [...auto[id].model];
     };
 
+// this function validates email as a precautionary measure for browsers hat did not support required on form field
     const validateEmail = () => {
       if (!emailTest.test(data.value.email))
         errorMessage.value.push("invalid email format");
     };
 
+// function checks for at leat one capital letter, small letter, number and special character
     const validateReference = () => {
       if (data.value.refCode.length < 6)
         errorMessage.value.push("refCode should be more than 6 character");
@@ -180,17 +197,22 @@ export default {
         );
     };
 
+// this function validate the check boxes 
     const validateCondition = () => {
       if (data.value.conditions.length < 1)
         errorMessage.value.push("you did not pick a chekbox for complaint");
     };
 
+// functions to validate auto maker not to be empty 
     const validateMaker = () => {
       if (!data.value.maker) errorMessage.value.push("Choose a car make");
     };
+	// functions to validate auto model not to be empty 
     const validateModel = () => {
       if (!data.value.maker) errorMessage.value.push("Choose a car model");
     };
+
+	// logic for form submission
     const submit = () => {
       errorMessage.value = [];
       validateEmail();
