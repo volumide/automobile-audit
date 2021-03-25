@@ -55,7 +55,7 @@ export default {
 		// function logs the displayed result to console in json format
 		const logJson = () =>{
 			console.log(JSON.stringify(complaint.value))
-			message.value = "audit log successfully in the console"
+			message.value = "Data submited successfully in loggd in the console"
 		} 
 		// store audit report from local storage into complaint variable to bind to html
 		onMounted(() => {
