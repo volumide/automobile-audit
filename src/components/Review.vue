@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center items-center h-screen  py-8 flex-col" v-if="complaint">
-		<p class=" p-3 font-bold text-blue-600 my-10 text-3xl">Auto Complaint Review Card</p>
+		<p class=" p-3 font-bold text-blue-600 my-10 text-3xl">Automobile Audit Review Card</p>
 		<div class="w-80  py-10 px-8 rounded-xl bg-gray-100 shadow-lg ">
 			<div class="p-2">
 				<small class="font-bold text-blue-500">Name</small>

@@ -1,6 +1,6 @@
 <template>
   <p class=" p-3 font-bold text-blue-600 my-10 text-3xl text-center">
-    Automobile AUdit Form
+    Automobile Audit Form
   </p>
   <ul v-if="errorMessage.length > 0" class="flex flex-col m-4 items-center">
     <li
