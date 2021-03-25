@@ -26,7 +26,7 @@
 			<div class="p-2">
 				<small class="font-bold text-blue-500">Complaints</small>
 				<ul class="flex flex-wrap py-1">
-					<li v-for="(condition, index) in complaint.conditions" :key="index" class="p-2 mr-2 rounded bg-blue-100 font-semibold">
+					<li v-for="(condition, index) in complaint.conditions" :key="index" class="p-2 rounded bg-blue-100 font-semibold m-1 ">
 						{{condition}}
 					</li>
 				</ul>

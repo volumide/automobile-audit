@@ -75,7 +75,6 @@
           placeholder="select auto maker"
           required
         >
-          <option value="">Select auto maker</option>
           <option
             v-for="(maker, index) in makers"
             :value="maker.name"
@@ -96,7 +95,6 @@
           v-model="data.model"
           required
         >
-          <option value="">Select model</option>
           <option
             :value="model"
             v-for="(model, index) in models"
