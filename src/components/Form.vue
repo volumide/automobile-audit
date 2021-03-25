@@ -1,144 +1,146 @@
 <template>
-  <p class=" p-3 font-bold text-blue-600 my-10 text-3xl text-center">
-    Automobile Audit Form
-  </p>
-  <!-- error messages -->
-  <ul v-if="errorMessage.length > 0" class="flex flex-col m-4 items-center">
-    <li
-      v-for="(error, index) in errorMessage"
-      :key="index"
-      class=" py-3 px-3 m-1 font-semibold rounded bg-red-600 text-white"
-    >
-      {{ error }}
-    </li>
-  </ul>
+<div class="bg h-screen py-6">
+	<p class=" p-3 font-bold text-white  text-3xl text-center">
+		Automobile Audit Form
+	</p>
+	<!-- error messages -->
+	<ul v-if="errorMessage.length > 0" class="flex flex-col m-4 items-center">
+		<li
+		v-for="(error, index) in errorMessage"
+		:key="index"
+		class=" py-3 px-3 m-1 font-semibold rounded bg-red-600 text-white"
+		>
+		{{ error }}
+		</li>
+	</ul>
 
-  <!-- form -->
-  <form
-    @submit.prevent="submit"
-    class="my-11 sm:w-2/5 mx-auto bg-blue-200 rounded-md  p-7 shadow-md"
-  >
-  <!-- name -->
-    <div class="p-3">
-      <label for="name" class="py-2 block font-semibold">Name</label>
-      <input
-        class="w-full px-5 py-5 rounded-lg outline-none border"
-        type="text"
-        name="name"
-        id="name"
-        placeholder="Name..."
-        required
-        v-model="data.name"
-      />
-    </div>
+	<!-- form -->
+	<form
+		@submit.prevent="submit"
+		class="my-11 sm:w-2/5 mx-auto bg-blue-200 rounded-md  p-7 shadow-md"
+	>
+	<!-- name -->
+		<div class="p-3">
+		<label for="name" class="py-2 block font-semibold">Name</label>
+		<input
+			class="w-full px-5 py-5 rounded-lg outline-none border"
+			type="text"
+			name="name"
+			id="name"
+			placeholder="Name..."
+			required
+			v-model="data.name"
+		/>
+		</div>
 
 
-<!-- reference code -->
-    <div class="p-3">
-      <label for="ref_code" class="py-2 block font-semibold"
-        >Reference code</label
-      >
-      <input
-        class="w-full px-5 py-5 rounded-lg outline-none  border"
-        type="text"
-        name="ref_code"
-        id="ref_code"
-        placeholder="Reference..."
-        required
-        v-model="data.refCode"
-      />
-    </div>
+	<!-- reference code -->
+		<div class="p-3">
+		<label for="ref_code" class="py-2 block font-semibold"
+			>Reference code</label
+		>
+		<input
+			class="w-full px-5 py-5 rounded-lg outline-none  border"
+			type="text"
+			name="ref_code"
+			id="ref_code"
+			placeholder="Reference..."
+			required
+			v-model="data.refCode"
+		/>
+		</div>
 
-<!-- email -->
-    <div class="p-3">
-      <label for="email" class="py-2 block font-semibold">Email</label>
-      <input
-        class="w-full px-5 py-5 rounded-lg outline-none border"
-        type="email"
-        name="email"
-        id="email"
-        required
-        placeholder="Email..."
-        v-model="data.email"
-      />
-    </div>
+	<!-- email -->
+		<div class="p-3">
+		<label for="email" class="py-2 block font-semibold">Email</label>
+		<input
+			class="w-full px-5 py-5 rounded-lg outline-none border"
+			type="email"
+			name="email"
+			id="email"
+			required
+			placeholder="Email..."
+			v-model="data.email"
+		/>
+		</div>
 
-<!-- automobile maker -->
-    <div class="p-3">
-      <label for="make" class="py-2 block font-semibold">Auto maker</label>
-      <select
-        class="w-full px-5 py-5 rounded-lg outline-none border"
-        name="maker"
-        id="maker"
-        v-model="data.maker"
-        @change="getModel($event)"
-        placeholder="select auto maker"
-        required
-      >
-        <option value="">Select auto maker</option>
-        <option
-          v-for="(maker, index) in makers"
-          :value="maker.name"
-          :id="maker.id"
-          :key="index"
-          >{{ maker.name }}</option
-        >
-      </select>
-    </div>
+	<!-- automobile maker -->
+		<div class="p-3">
+		<label for="make" class="py-2 block font-semibold">Auto maker</label>
+		<select
+			class="w-full px-5 py-5 rounded-lg outline-none border"
+			name="maker"
+			id="maker"
+			v-model="data.maker"
+			@change="getModel($event)"
+			placeholder="select auto maker"
+			required
+		>
+			<option value="">Select auto maker</option>
+			<option
+			v-for="(maker, index) in makers"
+			:value="maker.name"
+			:id="maker.id"
+			:key="index"
+			>{{ maker.name }}</option
+			>
+		</select>
+		</div>
 
-<!-- automobile model -->
-    <div v-if="models.length > 0" class="p-3">
-      <label for="model" class="py-2 block font-semibold">Model</label>
-      <select
-        class="w-full px-5 py-5 rounded-lg outline-none border"
-        name="model"
-        id="model"
-        v-model="data.model"
-        required
-      >
-        <option value="">Select model</option>
-        <option :value="model" v-for="(model, index) in models" :key="index">{{
-          model
-        }}</option>
-      </select>
-    </div>
+	<!-- automobile model -->
+		<div v-if="models.length > 0" class="p-3">
+		<label for="model" class="py-2 block font-semibold">Model</label>
+		<select
+			class="w-full px-5 py-5 rounded-lg outline-none border"
+			name="model"
+			id="model"
+			v-model="data.model"
+			required
+		>
+			<option value="">Select model</option>
+			<option :value="model" v-for="(model, index) in models" :key="index">{{
+			model
+			}}</option>
+		</select>
+		</div>
 
-<!-- Issues check boxes -->
-    <div class="p-3 flex flex-wrap ">
-      <div class="px-2">
-        <input
-          type="checkbox"
-          name="engineIssue"
-          id="engineIssue"
-          value="Engine Issue"
-          v-model="data.conditions"
-        />
-        <label for="engineIssue" class="px-1 cursor-pointer"
-          >Engine Issue</label
-        >
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          name="gearIssue"
-          id="gearIssue"
-          value="Gear box Issue"
-          v-model="data.conditions"
-        />
-        <label for="gearIssue" class="px-1 cursor-pointer"
-          >Gear Box Issue</label
-        >
-      </div>
-    </div>
+	<!-- Issues check boxes -->
+		<div class="p-3 flex flex-wrap ">
+		<div class="px-2">
+			<input
+			type="checkbox"
+			name="engineIssue"
+			id="engineIssue"
+			value="Engine Issue"
+			v-model="data.conditions"
+			/>
+			<label for="engineIssue" class="px-1 cursor-pointer"
+			>Engine Issue</label
+			>
+		</div>
+		<div>
+			<input
+			type="checkbox"
+			name="gearIssue"
+			id="gearIssue"
+			value="Gear box Issue"
+			v-model="data.conditions"
+			/>
+			<label for="gearIssue" class="px-1 cursor-pointer"
+			>Gear Box Issue</label
+			>
+		</div>
+		</div>
 
-	<!-- submit -->
-    <button
-      type="submit"
-      class="p-4 text-white font-semibold blocks bg-blue-600 my-3 mx-3  rounded-lg outline-none focus:outline-none"
-    >
-      Review
-    </button>
-  </form>
+		<!-- submit -->
+		<button
+		type="submit"
+		class="p-4 text-white font-semibold blocks bg-blue-600 my-3 mx-3  rounded-lg outline-none focus:outline-none"
+		>
+		Review
+		</button>
+	</form>
+</div>
 </template>
 
 <script>
@@ -237,3 +239,12 @@ export default {
   },
 };
 </script>
+
+<style >
+	.bg{
+		background: url('https://static.vecteezy.com/system/resources/previews/001/986/145/original/glowing-silver-sport-car-on-black-background-vector.jpg');
+		background-size: cover;
+		background-position: fixed;
+		overflow: auto;
+	}
+</style>

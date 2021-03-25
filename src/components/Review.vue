@@ -1,6 +1,6 @@
 <template>
-	<div class="flex  items-center h-screen  py-6 flex-col" v-if="complaint">
-		<p class=" p-3 font-bold text-blue-600 my-6 text-3xl">Automobile Audit Review Card</p>
+	<div class="bg flex items-center h-screen  py-6 flex-col" v-if="complaint">
+		<p class=" p-3 font-bold text-white my-6 text-3xl">Audit Review Card</p>
 		<!-- card design for outputing form result -->
 		<div class="w-96  py-10 px-10 rounded-xl bg-gray-100 shadow-lg ">
 			<div class="p-2">
