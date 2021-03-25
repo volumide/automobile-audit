@@ -137,7 +137,7 @@
 		type="submit"
 		class="p-4 text-white font-semibold blocks bg-blue-600 my-3 mx-3  rounded-lg outline-none focus:outline-none"
 		>
-		Review
+		Next
 		</button>
 	</form>
 </div>
