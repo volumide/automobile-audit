@@ -1,8 +1,11 @@
 <template>
 	<div class="bg flex items-center h-screen  py-6 flex-col" v-if="complaint">
 		<p class=" p-3 font-bold text-white my-6 text-3xl">Audit Review Card</p>
+
+		<p v-if="message" class="text-blue-600 py-3">{{message}}</p>
+
 		<!-- card design for outputing form result -->
-		<div class="w-96  py-10 px-10 rounded-xl bg-gray-100 shadow-lg ">
+		<div class=" sm:w-2/5  py-10 px-10 rounded-xl bg-gray-100 shadow-lg ">
 			<div class="p-2">
 				<small class="font-bold text-blue-500">Name</small>
 				<p class="py-1 font-semibold text-lg">{{truncate(complaint.name)}}</p>
@@ -45,11 +48,15 @@ export default {
 	setup() {
 		// initialize complaint card value
 		const complaint = ref([])
+		const message = ref('');
 		// function to truncate name greater than 30 characeter 
 		const truncate = (word) =>(word && word.length > 30 )? `${word.substring(0,29)}...` : word
 
 		// function logs the displayed result to console in json format
-		const logJson = () => console.log(JSON.stringify(complaint.value))
+		const logJson = () =>{
+			console.log(JSON.stringify(complaint.value))
+			message.value = "audit log successfully in the console"
+		} 
 		// store audit report from local storage into complaint variable to bind to html
 		onMounted(() => {
 			complaint.value = JSON.parse(localStorage.getItem('accepted'))['_value']
@@ -58,7 +65,8 @@ export default {
 			// return all ref and functions for dom manipulation
 			complaint,
 			truncate,
-			logJson
+			logJson,
+			message
 		}
 	}
 }

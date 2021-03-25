@@ -145,8 +145,8 @@ export default {
     //   intitlaize form fields data
     const data = ref({
       name: "",
-      refCode: "",
       email: "",
+      refCode: "",
       maker: "",
       model: "",
       conditions: [],
